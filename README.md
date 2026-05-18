@@ -33,11 +33,12 @@ Profesora: Bibiana María Rodríguez Castrillón.
 ├── .env.example
 ├── README.md
 ├── sql/
-│   ├── 00_schema.sql              # crea la BD `Restaurante` (Segunda Entrega) + seed
+│   ├── 00_schema.sql              # crea la BD `Restaurante` (Segunda Entrega)
 │   ├── 01_historial_salario.sql   # tabla de auditoría
 │   ├── 02_trigger.sql             # dos triggers sobre Empleado
 │   ├── 03_function.sql            # fn_nomina_restaurante
-│   └── 04_procedure.sql           # sp_contratar_empleado
+│   ├── 04_procedure.sql           # sp_contratar_empleado
+│   └── 05_seed.sql                # datos semilla (corre último para que el trigger los registre)
 ├── public/css/styles.css
 ├── tasks/todo.md                  # checklist y notas de desarrollo
 └── src/
@@ -148,14 +149,15 @@ const [[{ id }]] = await pool.query('SELECT @id AS id');
 Desde la raíz del proyecto:
 
 ```bash
-mysql -u root < sql/00_schema.sql               # crea BD Restaurante + seed
+mysql -u root < sql/00_schema.sql               # crea BD Restaurante
 mysql -u root Restaurante < sql/01_historial_salario.sql
 mysql -u root Restaurante < sql/02_trigger.sql
 mysql -u root Restaurante < sql/03_function.sql
 mysql -u root Restaurante < sql/04_procedure.sql
+mysql -u root Restaurante < sql/05_seed.sql     # carga datos despues del trigger
 ```
 
-Si tu MySQL tiene password, agregá `-p` en cada comando.
+El orden importa: los seeds van al final para que el trigger registre cada `INSERT` inicial en `Historial_salario`. Si tu MySQL tiene password, agregá `-p` en cada comando.
 
 ### 3. Configurar y arrancar la app
 
@@ -187,6 +189,7 @@ mysql -u root Restaurante < sql\01_historial_salario.sql
 mysql -u root Restaurante < sql\02_trigger.sql
 mysql -u root Restaurante < sql\03_function.sql
 mysql -u root Restaurante < sql\04_procedure.sql
+mysql -u root Restaurante < sql\05_seed.sql
 ```
 
 **c) Copiar el archivo de configuración y arrancar:**
@@ -222,7 +225,8 @@ El resto es idéntico: abrir [http://localhost:3000](http://localhost:3000).
 | `/empleados/new` | GET / POST | Crear (dispara trigger INSERT) |
 | `/empleados/:id/edit` | GET / PUT | Editar (dispara trigger UPDATE si cambia salario) |
 | `/empleados/:id` | DELETE | Eliminar |
-| `/empleados/:id/historial` | GET | **Visor del trigger** |
+| `/empleados/:id/historial` | GET | Historial de un empleado puntual |
+| `/reportes/historial` | GET | **Visor global del trigger** (todas las filas de `Historial_salario`) |
 | `/platos` | GET | Lista |
 | `/platos/new` | GET / POST | Crear |
 | `/platos/:id/edit` | GET / PUT | Editar |

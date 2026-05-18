@@ -1,5 +1,13 @@
 const pool = require('../db');
 const Restaurante = require('../models/restaurante');
+const Empleado = require('../models/empleado');
+
+exports.historial = async (req, res, next) => {
+  try {
+    const historial = await Empleado.findAllHistorial();
+    res.render('reportes/historial', { historial });
+  } catch (err) { next(err); }
+};
 
 exports.nominaForm = async (req, res, next) => {
   try {

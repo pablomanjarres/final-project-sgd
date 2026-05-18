@@ -1,0 +1,48 @@
+<%- include('../partials/head') %>
+  <div class="page-header">
+    <h1>Historial de cambios de salario</h1>
+    <a class="btn" href="/">← Inicio</a>
+  </div>
+
+  <p class="lead">
+    Esta página lista todas las filas de la tabla <code>Historial_salario</code>,
+    que es alimentada automáticamente por los triggers
+    <code>trg_empleado_after_insert</code> y <code>trg_empleado_after_update</code>
+    cada vez que se inserta un empleado o se modifica su salario.
+  </p>
+
+  <% if (historial.length === 0) { %>
+    <p class="empty">Todavía no hay registros. Creá o editá un empleado para ver el trigger en acción.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Empleado</th>
+          <th>Restaurante</th>
+          <th>Evento</th>
+          <th>Salario anterior</th>
+          <th>Salario nuevo</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% historial.forEach(h => { %>
+          <tr>
+            <td><%= h.id_historial %></td>
+            <td>
+              <a href="/empleados/<%= h.codigo_empleado %>/historial">
+                <%= h.empleado_nombre %>
+              </a>
+            </td>
+            <td><%= h.restaurante_nombre %></td>
+            <td><span class="badge <%= h.tipo_evento.toLowerCase() %>"><%= h.tipo_evento %></span></td>
+            <td><%= h.salario_anterior === null ? '(sin valor previo)' : '$' + Number(h.salario_anterior).toLocaleString('es-CO') %></td>
+            <td>$<%= Number(h.salario_nuevo).toLocaleString('es-CO') %></td>
+            <td><%= h.fecha_evento %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+<%- include('../partials/foot') %>

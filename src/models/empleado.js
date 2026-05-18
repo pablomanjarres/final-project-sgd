@@ -78,4 +78,18 @@ async function findHistorial(id) {
   return rows;
 }
 
-module.exports = { findAll, findById, create, update, remove, findHistorial };
+async function findAllHistorial() {
+  const [rows] = await pool.query(
+    `SELECT h.id_historial, h.codigo_empleado, h.salario_anterior, h.salario_nuevo,
+            h.tipo_evento, h.fecha_evento,
+            CONCAT(e.nombre, ' ', e.apellidos) AS empleado_nombre,
+            r.nombre AS restaurante_nombre
+       FROM Historial_salario h
+       JOIN Empleado e   ON e.codigo_empleado = h.codigo_empleado
+       JOIN Restaurante r ON r.codigo_restaurante = e.codigo_restaurante
+      ORDER BY h.fecha_evento DESC, h.id_historial DESC`
+  );
+  return rows;
+}
+
+module.exports = { findAll, findById, create, update, remove, findHistorial, findAllHistorial };
