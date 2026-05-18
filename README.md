@@ -11,11 +11,11 @@ La entrega cubre los cuatro requerimientos del enunciado:
 
 ## Equipo
 
-| Integrante | Rol |
+| Integrante |
 |---|---|
-| Valentina Barbosa Quilindo | Modelo + SQL |
-| Pablo Manjarres Negrette | Backend + integración |
-| Sofía Marín Bustamante | Vistas + sustentación |
+| Valentina Barbosa Quilindo |
+| Pablo Manjarres Negrette | 
+| Sofía Marín Bustamante |
 
 Profesora: Bibiana María Rodríguez Castrillón.
 
