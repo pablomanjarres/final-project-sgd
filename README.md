@@ -167,6 +167,48 @@ npm start
 
 Abrir [http://localhost:3000](http://localhost:3000).
 
+### 4. Setup en Windows
+
+Los pasos anteriores asumen un shell tipo bash (macOS o Linux). En Windows hay tres ajustes:
+
+**a) Asegurate de que `mysql` esté en el PATH.** El instalador de MySQL no siempre lo agrega. Verificá con:
+
+```
+where mysql
+```
+
+Si no aparece nada, agregá `C:\Program Files\MySQL\MySQL Server 8.0\bin` al PATH del sistema (Configuración → Sistema → Acerca de → Configuración avanzada del sistema → Variables de entorno) y abrí una nueva ventana de terminal.
+
+**b) Cargar la base de datos** (`cmd.exe` o PowerShell):
+
+```
+mysql -u root < sql\00_schema.sql
+mysql -u root Restaurante < sql\01_historial_salario.sql
+mysql -u root Restaurante < sql\02_trigger.sql
+mysql -u root Restaurante < sql\03_function.sql
+mysql -u root Restaurante < sql\04_procedure.sql
+```
+
+**c) Copiar el archivo de configuración y arrancar:**
+
+En `cmd.exe`:
+```
+copy .env.example .env
+notepad .env
+npm install
+npm start
+```
+
+En PowerShell:
+```
+Copy-Item .env.example .env
+notepad .env
+npm install
+npm start
+```
+
+El resto es idéntico: abrir [http://localhost:3000](http://localhost:3000).
+
 ## Mapa de rutas
 
 | Ruta | Método | Función |
