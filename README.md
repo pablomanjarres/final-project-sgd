@@ -64,7 +64,7 @@ Las cinco entidades fuertes vienen directamente de la Segunda Entrega:
 - **Ingrediente** (`codigo_ingrediente`, nombre, costo_unitario, tipo)
 - **Proveedor** (`codigo_proveedor`, nombre, NIT único, dirección, correo)
 
-Más las tablas multivaluadas `Telefonos_*` y las relacionales `Plato_en_Restaurante`, `Ingrediente_en_Plato`, `Ingrediente_por_Proveedor`. La app solo expone formularios para Restaurante, Empleado y Plato — el resto del schema queda intacto para que otras consultas funcionen.
+Más las tablas multivaluadas `Telefonos_*` y las relacionales `Plato_en_Restaurante`, `Ingrediente_en_Plato`, `Ingrediente_por_Proveedor`. La app solo expone formularios para Restaurante, Empleado y Plato. El resto del schema queda intacto para que otras consultas funcionen.
 
 La tabla nueva agregada en esta entrega es **`Historial_salario`** (la dispara el trigger):
 
@@ -87,10 +87,10 @@ CREATE TABLE Historial_salario (
 
 MySQL no soporta `AFTER INSERT OR UPDATE` en un único `CREATE TRIGGER`, así que se definen dos disparadores que escriben a `Historial_salario`:
 
-- `trg_empleado_after_insert` — al crear un empleado registra `tipo_evento='INSERT'` con `salario_anterior = NULL`.
-- `trg_empleado_after_update` — al actualizar, **solo registra si cambia el salario** (`IF OLD.salario <> NEW.salario`). Esto evita ruido cuando se edita otro campo.
+- `trg_empleado_after_insert`: al crear un empleado registra `tipo_evento='INSERT'` con `salario_anterior = NULL`.
+- `trg_empleado_after_update`: al actualizar, **solo registra si cambia el salario** (`IF OLD.salario <> NEW.salario`). Esto evita ruido cuando se edita otro campo.
 
-### Función — `fn_nomina_restaurante`
+### Función: `fn_nomina_restaurante`
 
 ```sql
 fn_nomina_restaurante(p_codigo_restaurante INT) RETURNS DECIMAL(14,2)
@@ -106,7 +106,7 @@ const [rows] = await pool.query(
 );
 ```
 
-### Procedimiento — `sp_contratar_empleado`
+### Procedimiento: `sp_contratar_empleado`
 
 ```sql
 sp_contratar_empleado(
@@ -226,4 +226,4 @@ El proyecto se probó end-to-end antes de subir:
 
 ## Licencia
 
-Proyecto académico. Universidad EAFIT, curso ST0247 / SI4002 — Sistemas de Gestión de Bases de Datos, semestre 2026-1.
+Proyecto académico. Universidad EAFIT, curso ST0247 / SI4002, Sistemas de Gestión de Bases de Datos, semestre 2026-1.
