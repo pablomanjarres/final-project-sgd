@@ -12,7 +12,7 @@ La entrega cubre los cuatro requerimientos del enunciado:
 ## Equipo
 
 | Integrante |
-|---|---|
+|---|
 | Valentina Barbosa Quilindo |
 | Pablo Manjarres Negrette | 
 | Sofía Marín Bustamante |
