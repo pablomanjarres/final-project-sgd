@@ -188,21 +188,6 @@ Abrir [http://localhost:3000](http://localhost:3000).
 | `/reportes/nomina` | GET | **Invoca la función** |
 | `/reportes/contratar` | GET / POST | **Invoca el procedimiento** |
 
-## Guion de sustentación
-
-Diez pasos sugeridos para mostrar los cuatro requisitos en orden:
-
-1. Mostrar el listado `/restaurantes` con los 3 seed. Crear uno nuevo.
-2. Ir a `/empleados`, mostrar la lista con JOIN. Crear un empleado nuevo.
-3. Abrir `/empleados/:id/historial` del recién creado → fila `tipo_evento='INSERT'` con `salario_anterior=NULL`. **Trigger demostrado (caso INSERT).**
-4. Editar el empleado y cambiar **solo el salario**. Volver al historial → nueva fila `tipo_evento='UPDATE'`. **Trigger demostrado (caso UPDATE).**
-5. Editar el mismo empleado y cambiar **otro campo (no el salario)**. Volver al historial → no aparece fila nueva. **Trigger demostrado (filtro `IF`).**
-6. Crear un plato desde `/platos/new` usando el `<select>` de categorías.
-7. Ir a `/reportes/nomina`, seleccionar un restaurante → la función devuelve la suma. **Función demostrada.**
-8. Ir a `/reportes/contratar`. Probar con salario 500.000 → mensaje "Salario por debajo del mínimo legal". **Procedimiento, validación 1.**
-9. Probar con un DNI que ya existe → mensaje "Ya existe un empleado con ese DNI". **Procedimiento, validación 3.**
-10. Llenar todo correctamente y enviar → mensaje verde con el nuevo `codigo_empleado` devuelto por el `OUT`. **Procedimiento, ruta feliz.**
-
 ## Verificación previa
 
 El proyecto se probó end-to-end antes de subir:
