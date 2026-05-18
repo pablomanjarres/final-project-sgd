@@ -1,0 +1,36 @@
+<%- include('../partials/head') %>
+  <h1><%= restaurante ? 'Editar restaurante' : 'Nuevo restaurante' %></h1>
+
+  <form action="<%= action %>" method="<%= method %>" class="form">
+    <label>
+      Nombre
+      <input type="text" name="nombre" required maxlength="45"
+             value="<%= restaurante ? restaurante.nombre : '' %>" />
+    </label>
+    <label>
+      Calle
+      <input type="text" name="calle" required maxlength="45"
+             value="<%= restaurante ? restaurante.calle : '' %>" />
+    </label>
+    <label>
+      Ciudad
+      <input type="text" name="ciudad" required maxlength="45"
+             value="<%= restaurante ? restaurante.ciudad : '' %>" />
+    </label>
+    <label>
+      País
+      <input type="text" name="pais" required maxlength="45"
+             value="<%= restaurante ? restaurante.pais : '' %>" />
+    </label>
+    <label>
+      Capacidad máxima (comensales)
+      <input type="number" name="cap_maxima" min="1" required
+             value="<%= restaurante ? restaurante.cap_maxima : '' %>" />
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Guardar</button>
+      <a href="/restaurantes" class="btn">Cancelar</a>
+    </div>
+  </form>
+<%- include('../partials/foot') %>

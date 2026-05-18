@@ -1,0 +1,45 @@
+<%- include('../partials/head') %>
+  <div class="page-header">
+    <h1>Empleados</h1>
+    <a class="btn primary" href="/empleados/new">+ Nuevo empleado</a>
+  </div>
+
+  <% if (empleados.length === 0) { %>
+    <p class="empty">Aún no hay empleados registrados.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>DNI</th>
+          <th>Cargo</th>
+          <th>Restaurante</th>
+          <th>Salario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% empleados.forEach(e => { %>
+          <tr>
+            <td><%= e.codigo_empleado %></td>
+            <td><%= e.nombre %></td>
+            <td><%= e.apellidos %></td>
+            <td><%= e.DNI %></td>
+            <td><%= e.cargo %></td>
+            <td><%= e.restaurante_nombre %></td>
+            <td>$<%= Number(e.salario).toLocaleString('es-CO') %></td>
+            <td class="actions">
+              <a href="/empleados/<%= e.codigo_empleado %>/edit">Editar</a>
+              <a href="/empleados/<%= e.codigo_empleado %>/historial">Historial</a>
+              <form action="/empleados/<%= e.codigo_empleado %>?_method=DELETE" method="POST" onsubmit="return confirm('¿Eliminar empleado <%= e.nombre %> <%= e.apellidos %>?');">
+                <button type="submit" class="btn danger">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+<%- include('../partials/foot') %>

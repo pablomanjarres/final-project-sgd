@@ -1,0 +1,12 @@
+node_modules/
+.env
+*.log
+.DS_Store
+
+# Local Claude / IDE state
+.claude/
+
+# Archivos de otros proyectos que viven al lado de este final-project
+Claude.pdf
+sgd-project-1/
+sedes_olimpicas.sql

@@ -1,0 +1,69 @@
+<%- include('../partials/head') %>
+  <h1>Contratar empleado</h1>
+  <p class="lead">Esta página invoca el procedimiento <code>sp_contratar_empleado</code>, que aplica tres validaciones antes de insertar: salario mínimo, restaurante existente y DNI no duplicado. <code>fecha_ingreso</code> se asigna automáticamente al día de hoy.</p>
+
+  <% if (creado) { %>
+    <div class="alert success">
+      Empleado creado con éxito · código <strong>#<%= creado.id %></strong> · <%= creado.nombre %> <%= creado.apellidos %>.
+    </div>
+  <% } %>
+  <% if (error) { %>
+    <div class="alert error">Error del procedimiento: <%= error %></div>
+  <% } %>
+
+  <form action="/reportes/contratar" method="POST" class="form grid-2">
+    <label>
+      Restaurante
+      <select name="codigo_restaurante" required>
+        <option value="">— Seleccionar —</option>
+        <% restaurantes.forEach(r => { %>
+          <option value="<%= r.codigo_restaurante %>"
+            <%= String(datos.codigo_restaurante) === String(r.codigo_restaurante) ? 'selected' : '' %>>
+            <%= r.nombre %> (<%= r.ciudad %>)
+          </option>
+        <% }) %>
+      </select>
+    </label>
+    <label>
+      Cargo
+      <input type="text" name="cargo" required maxlength="45"
+             value="<%= datos.cargo || '' %>" />
+    </label>
+    <label>
+      Nombre
+      <input type="text" name="nombre" required maxlength="45"
+             value="<%= datos.nombre || '' %>" />
+    </label>
+    <label>
+      Apellidos
+      <input type="text" name="apellidos" required maxlength="45"
+             value="<%= datos.apellidos || '' %>" />
+    </label>
+    <label>
+      DNI
+      <input type="text" name="DNI" required maxlength="30"
+             value="<%= datos.DNI || '' %>" />
+    </label>
+    <label>
+      Correo (opcional)
+      <input type="email" name="correo" maxlength="45"
+             value="<%= datos.correo || '' %>" />
+    </label>
+    <label>
+      Fecha de nacimiento
+      <input type="date" name="fecha_nacimiento" required
+             value="<%= datos.fecha_nacimiento || '' %>" />
+    </label>
+    <label>
+      Salario
+      <input type="number" step="0.01" name="salario" min="0" required
+             value="<%= datos.salario || '' %>" />
+      <small class="hint">Mínimo permitido: 1.300.000</small>
+    </label>
+
+    <div class="form-actions full">
+      <button type="submit" class="btn primary">Contratar (CALL sp_contratar_empleado)</button>
+      <a href="/empleados" class="btn">Cancelar</a>
+    </div>
+  </form>
+<%- include('../partials/foot') %>

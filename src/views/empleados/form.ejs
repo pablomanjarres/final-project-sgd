@@ -1,0 +1,68 @@
+<%- include('../partials/head') %>
+  <h1><%= empleado ? 'Editar empleado' : 'Nuevo empleado' %></h1>
+
+  <% if (empleado) { %>
+    <p class="hint">Al cambiar el <strong>salario</strong>, el trigger registrará el cambio en <code>Historial_salario</code>.</p>
+  <% } %>
+
+  <form action="<%= action %>" method="<%= method %>" class="form grid-2">
+    <label>
+      Restaurante
+      <select name="codigo_restaurante" required>
+        <option value="">— Seleccionar —</option>
+        <% restaurantes.forEach(r => { %>
+          <option value="<%= r.codigo_restaurante %>"
+            <%= empleado && empleado.codigo_restaurante === r.codigo_restaurante ? 'selected' : '' %>>
+            <%= r.nombre %> (<%= r.ciudad %>)
+          </option>
+        <% }) %>
+      </select>
+    </label>
+    <label>
+      Cargo
+      <input type="text" name="cargo" required maxlength="45"
+             value="<%= empleado ? empleado.cargo : '' %>"
+             placeholder="chef, mesero, administrador..." />
+    </label>
+    <label>
+      Nombre
+      <input type="text" name="nombre" required maxlength="45"
+             value="<%= empleado ? empleado.nombre : '' %>" />
+    </label>
+    <label>
+      Apellidos
+      <input type="text" name="apellidos" required maxlength="45"
+             value="<%= empleado ? empleado.apellidos : '' %>" />
+    </label>
+    <label>
+      DNI
+      <input type="text" name="DNI" required maxlength="30"
+             value="<%= empleado ? empleado.DNI : '' %>" />
+    </label>
+    <label>
+      Correo (opcional)
+      <input type="email" name="correo" maxlength="45"
+             value="<%= empleado && empleado.correo ? empleado.correo : '' %>" />
+    </label>
+    <label>
+      Fecha de nacimiento
+      <input type="date" name="fecha_nacimiento" required
+             value="<%= empleado ? empleado.fecha_nacimiento : '' %>" />
+    </label>
+    <label>
+      Fecha de ingreso
+      <input type="date" name="fecha_ingreso" required
+             value="<%= empleado ? empleado.fecha_ingreso : '' %>" />
+    </label>
+    <label>
+      Salario
+      <input type="number" step="0.01" name="salario" min="0" required
+             value="<%= empleado ? empleado.salario : '' %>" />
+    </label>
+
+    <div class="form-actions full">
+      <button type="submit" class="btn primary">Guardar</button>
+      <a href="/empleados" class="btn">Cancelar</a>
+    </div>
+  </form>
+<%- include('../partials/foot') %>

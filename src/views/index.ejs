@@ -1,0 +1,27 @@
+<%- include('partials/head') %>
+  <h1>Cadena Sabor &amp; Tradición</h1>
+  <p class="lead">Panel de administración. Esta app cubre la <strong>Tercera Entrega</strong> de SGD: CRUD sobre tres tablas, un trigger de auditoría, una función y un procedimiento invocables desde la interfaz.</p>
+
+  <section class="grid">
+    <a href="/restaurantes" class="card">
+      <h2>Restaurantes</h2>
+      <p>Administrar las sucursales: código, nombre, dirección y capacidad.</p>
+    </a>
+    <a href="/empleados" class="card">
+      <h2>Empleados</h2>
+      <p>Ver y editar el personal asignado a cada restaurante. Cada cambio de salario queda registrado por el <em>trigger</em>.</p>
+    </a>
+    <a href="/platos" class="card">
+      <h2>Platos</h2>
+      <p>Carta global de la cadena con precio base y tiempo de preparación.</p>
+    </a>
+    <a href="/reportes/nomina" class="card alt">
+      <h2>Reporte de nómina</h2>
+      <p>Invoca la función <code>fn_nomina_restaurante</code>.</p>
+    </a>
+    <a href="/reportes/contratar" class="card alt">
+      <h2>Contratar empleado</h2>
+      <p>Invoca el procedimiento <code>sp_contratar_empleado</code> con sus validaciones.</p>
+    </a>
+  </section>
+<%- include('partials/foot') %>

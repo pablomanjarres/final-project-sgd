@@ -1,0 +1,40 @@
+<%- include('../partials/head') %>
+  <div class="page-header">
+    <h1>Restaurantes</h1>
+    <a class="btn primary" href="/restaurantes/new">+ Nuevo restaurante</a>
+  </div>
+
+  <% if (restaurantes.length === 0) { %>
+    <p class="empty">Aún no hay restaurantes registrados.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Ciudad</th>
+          <th>País</th>
+          <th>Capacidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% restaurantes.forEach(r => { %>
+          <tr>
+            <td><%= r.codigo_restaurante %></td>
+            <td><%= r.nombre %></td>
+            <td><%= r.ciudad %></td>
+            <td><%= r.pais %></td>
+            <td><%= r.cap_maxima %></td>
+            <td class="actions">
+              <a href="/restaurantes/<%= r.codigo_restaurante %>/edit">Editar</a>
+              <form action="/restaurantes/<%= r.codigo_restaurante %>?_method=DELETE" method="POST" onsubmit="return confirm('¿Eliminar restaurante <%= r.nombre %>?');">
+                <button type="submit" class="btn danger">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+<%- include('../partials/foot') %>

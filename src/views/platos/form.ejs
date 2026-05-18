@@ -1,0 +1,39 @@
+<%- include('../partials/head') %>
+  <h1><%= plato ? 'Editar plato' : 'Nuevo plato' %></h1>
+
+  <form action="<%= action %>" method="<%= method %>" class="form">
+    <label>
+      Nombre
+      <input type="text" name="nombre" required maxlength="45"
+             value="<%= plato ? plato.nombre : '' %>" />
+    </label>
+    <label>
+      Descripción (opcional)
+      <textarea name="descripcion" maxlength="60"><%= plato && plato.descripcion ? plato.descripcion : '' %></textarea>
+    </label>
+    <label>
+      Categoría
+      <select name="categoria" required>
+        <option value="">— Seleccionar —</option>
+        <% categorias.forEach(c => { %>
+          <option value="<%= c %>" <%= plato && plato.categoria === c ? 'selected' : '' %>><%= c %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>
+      Precio base
+      <input type="number" step="0.01" name="precio_base" min="0" required
+             value="<%= plato ? plato.precio_base : '' %>" />
+    </label>
+    <label>
+      Tiempo de preparación (minutos)
+      <input type="number" name="tiempo_prep" min="1" required
+             value="<%= plato ? plato.tiempo_prep : '' %>" />
+    </label>
+
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Guardar</button>
+      <a href="/platos" class="btn">Cancelar</a>
+    </div>
+  </form>
+<%- include('../partials/foot') %>

@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+  <h1>Reporte de nómina por restaurante</h1>
+  <p class="lead">Esta página llama a la función SQL <code>fn_nomina_restaurante(codigo)</code> y muestra el total de salarios de los empleados asignados al restaurante seleccionado.</p>
+
+  <form action="/reportes/nomina" method="GET" class="form inline">
+    <label>
+      Restaurante
+      <select name="codigo_restaurante" required>
+        <option value="">— Seleccionar —</option>
+        <% restaurantes.forEach(r => { %>
+          <option value="<%= r.codigo_restaurante %>"
+            <%= restauranteSeleccionado && restauranteSeleccionado.codigo_restaurante === r.codigo_restaurante ? 'selected' : '' %>>
+            <%= r.nombre %> (<%= r.ciudad %>)
+          </option>
+        <% }) %>
+      </select>
+    </label>
+    <button type="submit" class="btn primary">Calcular nómina</button>
+  </form>
+
+  <% if (resultado !== null) { %>
+    <div class="result">
+      <p>Nómina total para <strong><%= restauranteSeleccionado.nombre %></strong>:</p>
+      <p class="big">$<%= Number(resultado).toLocaleString('es-CO') %></p>
+      <small>Query ejecutada: <code>SELECT fn_nomina_restaurante(<%= restauranteSeleccionado.codigo_restaurante %>)</code></small>
+    </div>
+  <% } %>
+<%- include('../partials/foot') %>
