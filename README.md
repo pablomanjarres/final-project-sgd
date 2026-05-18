@@ -24,7 +24,6 @@ Profesora: Bibiana María Rodríguez Castrillón.
 - **Backend:** Node.js (≥18) + Express 4
 - **Vistas:** EJS (server-rendered) + CSS plano
 - **Base de datos:** MySQL 8 (`mysql2/promise`)
-- **Sin frameworks de validación, sin SPA, sin Docker** — la app es deliberadamente mínima para que cada pieza se pueda señalar durante la sustentación.
 
 ## Estructura
 
