@@ -7,7 +7,7 @@ La entrega cubre los cuatro requerimientos del enunciado:
 1. **CRUD aplicación** sobre tres tablas del modelo: `Restaurante`, `Empleado`, `Plato`.
 2. **Un trigger** que audita los cambios de salario en una tabla `Historial_salario`.
 3. **Una función** SQL (`fn_nomina_restaurante`) invocada desde la interfaz.
-4. **Un procedimiento** SQL (`sp_contratar_empleado`) invocado desde la interfaz, con validaciones y manejo de errores.
+4. **Un procedimiento** SQL (`sp_contratar_empleado`) invocado desde la interfaz, con validaciones y manejo de errores clave.
 
 ## Equipo
 
