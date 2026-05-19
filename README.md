@@ -252,7 +252,7 @@ El proyecto se probó end-to-end antes de subir:
 - **Por qué dos triggers en vez de uno:** MySQL define cada trigger por la dupla (timing, event). No existe `AFTER INSERT OR UPDATE`.
 - **Por qué `IF OLD.salario <> NEW.salario`:** Para no contaminar el historial cuando solo se edita cargo, correo, etc.
 - **Por qué el procedimiento tiene su propia página separada del CRUD normal:** El CRUD usa `INSERT` directo (más simple). El procedimiento se invoca aparte para que la sustentación pueda mostrarlo aislado y exhibir sus validaciones.
-- **Por qué `fecha_ingreso = CURDATE()` dentro del procedimiento:** El procedimiento simula una contratación oficial, así que la fecha no es parámetro. En el CRUD normal sí se pide.
+- **Por qué `fecha_ingreso = CURDATE()` dentro del procedimiento:** El procedimiento simula una contratación oficial, así que la fecha no es parámetro. En el CRUD normal sí se solicita.
 - **Por qué `dateStrings: true` en el pool:** Para que `mysql2` devuelva las fechas como `'YYYY-MM-DD'` strings y se puedan repintar directamente en los `<input type="date">` sin conversión.
 
 ## Licencia
